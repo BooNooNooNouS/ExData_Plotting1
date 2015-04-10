@@ -24,5 +24,7 @@ reducedData <- data[data$Date >= minDate & data$Date < maxDate, c("Date", "Globa
 remove(maxDate, minDate, data) # Clear out memory
 
 # 2nd plot: Day of the week VS Global Active Power in KW
+png("Plot2.png", width = 480, height = 480, bg = "transparent")
 plot(reducedData$Date, reducedData$Global_active_power, pch=".", xlab = "", ylab = "Global Active Power (kilowatts)")
 lines(reducedData$Date, reducedData$Global_active_power)
+dev.off()
