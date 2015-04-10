@@ -38,8 +38,9 @@ remove(maxDate, minDate, data) # Clear out memory
 library(graphics)
 
 # 1st plot: Global Active Power in KW vs Frequency
-
-> hist(reducedData$Global_active_power, 
+png("Plot1.png", width = 480, height = 480, bg = "transparent")
+hist(reducedData$Global_active_power, 
        col = "Red", 
        main = "Global Active Power", 
        xlab = "Global Active Power (kilowatts)")
+dev.off()
