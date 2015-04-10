@@ -28,7 +28,7 @@ data$Date <- as.Date(data$Date, format = "%d/%m/%Y")
 minDate <- as.Date("2007-02-01")
 maxDate <- as.Date("2007-02-02")
 
-reducedData <- data[data$Date >= minDate & data$Date <= maxDate, ]
+reducedData <- data[data$Date >= minDate & data$Date <= maxDate, c("Date", "Global_active_power")]
 remove(maxDate, minDate, data) # Clear out memory
 
 

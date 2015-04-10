@@ -43,7 +43,8 @@ lines(reducedData$Date, reducedData$Sub_metering_3, col = "blue")
 legend(
   "topright", 
   lwd=c(2.5,2.5),
-  cex = 0.5,
+  cex = 0.8,
+  bty="n",
   col=c("black", "red", "blue"), 
   legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
 

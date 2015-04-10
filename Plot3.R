@@ -4,7 +4,7 @@ library(lubridate)
 
 # Verify the household_power_consumption file exists in the working directory 
 if(!file.exists(".\\household_power_consumption.txt")){
-  warning("Expected file household_power_consumption.txt doesn't exist in the current working directory.")
+  stop("Expected file household_power_consumption.txt doesn't exist in the current working directory.")
 }
 
 # Load the file into memory
@@ -20,9 +20,18 @@ data$Date <- dmy_hms(sprintf('%s %s', data$Date, data$Time))
 minDate <- ymd("2007-02-01")
 maxDate <- ymd("2007-02-03")
 
-reducedData <- data[data$Date >= minDate & data$Date < maxDate, c("Date", "Global_active_power")]
+reducedData <- data[data$Date >= minDate & data$Date < maxDate, c("Date", "Sub_metering_1", "Sub_metering_2", "Sub_metering_3")]
 remove(maxDate, minDate, data) # Clear out memory
 
-# 2nd plot: Day of the week VS Global Active Power in KW
-plot(reducedData$Date, reducedData$Global_active_power, pch=".", xlab = "", ylab = "Global Active Power (kilowatts)")
-lines(reducedData$Date, reducedData$Global_active_power)
+# Generate a png file with the plot
+png("Plot3.png", width = 480, height = 480, bg = "transparent")
+plot(reducedData$Date, reducedData$Sub_metering_1, pch=".", xlab = "", ylab = "Energy Sub Metering")
+lines(reducedData$Date, reducedData$Sub_metering_1, col = "black")
+lines(reducedData$Date, reducedData$Sub_metering_2, col = "red")
+lines(reducedData$Date, reducedData$Sub_metering_3, col = "blue")
+legend(
+  "topright", 
+  lwd=c(2.5,2.5),
+  col=c("black", "red", "blue"), 
+  legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
+dev.off()
